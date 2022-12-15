@@ -1,4 +1,5 @@
-﻿using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
+﻿using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;
@@ -20,7 +21,35 @@ public class Program
         httpClient.DefaultRequestHeaders.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
 
         var subjectService = new SubjectService(httpClient);
+        var exampleSubjectService = new ExampleSubjectService(httpClient);
+        
+        /***  Get All Example Subject  ***/
+        var listAllExampleSubjectRequest = new ListAllExampleSubjectRequest()
+        {
+            Page = 1,
+            Size = 1,
+            Subject = "Asadbek Sindarov",
+        };
+        
+        var listAllExampleSubjectResponse = await exampleSubjectService.GetAllExampleSubjects(listAllExampleSubjectRequest);
+        
+        foreach (var exampleSubject in listAllExampleSubjectResponse.Faces)
+        {
+            Console.WriteLine(exampleSubject.Subject);
+            Console.WriteLine(exampleSubject.ImageId);
+        }
+        //
+        // Console.WriteLine(listAllExampleSubjectResponse.PageNumber);
+        // Console.WriteLine(listAllExampleSubjectResponse.PageSize);
+        // Console.WriteLine(listAllExampleSubjectResponse.TotalElements);
+        // Console.WriteLine(listAllExampleSubjectResponse.TotalPages);
 
+
+        
+        
+        /***************************************/
+
+        /*************     Subject  ******************/
         /***  Get All subjects ***/
         // var getAllSubjectResponse = await subjectService.GetAllSubject();
         // foreach (var subject in getAllSubjectResponse.Subjects)
@@ -32,7 +61,7 @@ public class Program
         // var deleteAllSubjectsResponse = await subjectService.DeleteAllSubjects();
         //
         // Console.WriteLine(deleteAllSubjectsResponse.Deleted);
-        
+
         /*** Delete subject ***/
         // var deleteSubjectRequest = new DeleteSubjectRequest()
         // {
@@ -64,5 +93,9 @@ public class Program
         // var renameSubjectResponse = await subjectService.RenameSubject(renameSubjectRequest);
         //
         // Console.WriteLine(renameSubjectResponse.Updated);
+
+
+
+        /***************************************/
     }
 }
