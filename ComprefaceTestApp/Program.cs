@@ -1,4 +1,5 @@
-﻿using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+﻿using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
@@ -21,23 +22,23 @@ public class Program
         httpClient.DefaultRequestHeaders.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
 
         var subjectService = new SubjectService(httpClient);
-        var exampleSubjectService = new ExampleSubjectService(httpClient);
+        // var exampleSubjectService = new ExampleSubjectService(httpClient);
         
         /***  Get All Example Subject  ***/
-        var listAllExampleSubjectRequest = new ListAllExampleSubjectRequest()
-        {
-            Page = 1,
-            Size = 1,
-            Subject = "Asadbek Sindarov",
-        };
-        
-        var listAllExampleSubjectResponse = await exampleSubjectService.GetAllExampleSubjects(listAllExampleSubjectRequest);
-        
-        foreach (var exampleSubject in listAllExampleSubjectResponse.Faces)
-        {
-            Console.WriteLine(exampleSubject.Subject);
-            Console.WriteLine(exampleSubject.ImageId);
-        }
+        // var listAllExampleSubjectRequest = new ListAllExampleSubjectRequest()
+        // {
+        //     Page = 1,
+        //     Size = 1,
+        //     Subject = "Asadbek Sindarov",
+        // };
+        //
+        // var listAllExampleSubjectResponse = await exampleSubjectService.GetAllExampleSubjects(listAllExampleSubjectRequest);
+        //
+        // foreach (var exampleSubject in listAllExampleSubjectResponse.Faces)
+        // {
+        //     Console.WriteLine(exampleSubject.Subject);
+        //     Console.WriteLine(exampleSubject.ImageId);
+        // }
         //
         // Console.WriteLine(listAllExampleSubjectResponse.PageNumber);
         // Console.WriteLine(listAllExampleSubjectResponse.PageSize);
@@ -45,17 +46,30 @@ public class Program
         // Console.WriteLine(listAllExampleSubjectResponse.TotalPages);
 
 
-        
-        
+        // var addExampleSubjectRequest = new AddExampleSubjectRequest()
+        // {
+        //     DetProbThreShold = 0.81m,
+        //     FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\photo_2022-12-14_10-55-57.jpg",
+        //     Subject = "Asadbek Sindarov",
+        // };
+        //
+        // var addExampleSubjectResponse = await exampleSubjectService.AddExampleSubject(addExampleSubjectRequest);
+        //
+        // Console.WriteLine(addExampleSubjectResponse.Subject);
+        // Console.WriteLine(addExampleSubjectResponse.ImageId);
+
+
+
+
         /***************************************/
 
         /*************     Subject  ******************/
         /***  Get All subjects ***/
-        // var getAllSubjectResponse = await subjectService.GetAllSubject();
-        // foreach (var subject in getAllSubjectResponse.Subjects)
-        // {
-        //     Console.WriteLine(subject);
-        // }
+        var getAllSubjectResponse = await subjectService.GetAllSubject();
+        foreach (var subject in getAllSubjectResponse.Subjects)
+        {
+            Console.WriteLine(subject);
+        }
 
         /*** Delete all subjects ***/
         // var deleteAllSubjectsResponse = await subjectService.DeleteAllSubjects();
