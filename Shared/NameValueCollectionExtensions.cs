@@ -1,17 +1,27 @@
 ﻿using System.Collections.Specialized;
+using Shared.Extensions;
 
 namespace Shared;
 
+public interface IInterface
+{
+    int Page { get; set; }
+}
+
 public static class NameValueCollectionExtensions
 {
-    public static NameValueCollection AssignPropertyValue<T>(this NameValueCollection collection, T type)
-    where T: class
+    public static NameValueCollection AssignPropertyValue<T>(this NameValueCollection collection, T value)
     {
-        var properties = type.GetType().GetProperties();
-        T value = null;
+        var properties = value.GetType().GetProperties();
         foreach (var property in properties)
         {
-            Console.WriteLine($"{property.Name}, {property.GetValue(value, null)}"); 
+            var propertyValue = property.GetValue(value, null);
+            // parameter name should be in the snake case!!!
+            var propertyName = property.Name.ToSnakeCase();
+            if (propertyValue != null)
+            {
+                collection[propertyName] = propertyValue.ToString();
+            }
         }
 
         return collection;

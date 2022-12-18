@@ -1,4 +1,6 @@
-﻿namespace ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
+﻿using System.Text.Json.Serialization;
+
+namespace ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
 
 public class GetAllSubjectResponse
 {
