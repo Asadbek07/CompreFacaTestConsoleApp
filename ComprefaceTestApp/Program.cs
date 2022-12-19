@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using ComprefaceTestApp.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +36,6 @@ public class Program
         
         var subjectService = new SubjectService(httpClient, jsonOptions);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
-        
         
         // TODO: Fix sending http request to Add Example Subject endpoint!!! 
         // var addExampleSubjectRequest = new AddExampleSubjectRequest()
