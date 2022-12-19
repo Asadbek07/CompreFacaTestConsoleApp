@@ -6,8 +6,6 @@ using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteAllSubjects;
 using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
-using Flurl.Http;
-using Shared.Constants;
 
 namespace ComprefaceTestApp.Services;
 

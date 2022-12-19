@@ -1,7 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Web;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Shared;
@@ -21,14 +20,10 @@ public class ExampleSubjectService
     
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
-        var uriBuilder = new UriBuilder($"{_httpClient.BaseAddress}recognition/faces");
-        
-        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-        
-        query.AssignPropertyValue(request);
-        uriBuilder.Query = query.ToString();
-
-        var requestUrl = uriBuilder.ToString();
+        var queryBuilder = new QueryBuilder($"{_httpClient.BaseAddress}recognition/faces");
+        var requestUrl = queryBuilder
+            .SetQuery(request)
+            .Build();
         
         var multipartFormContent = new MultipartFormDataContent();
         var fileStreamContent = new StreamContent(File.OpenRead(request.FilePath));
@@ -40,20 +35,19 @@ public class ExampleSubjectService
             await _httpClient.PostAsJsonAsync(requestUrl, multipartFormContent);
 
         Console.WriteLine(response.RequestMessage);
-        var exampleSubjectDto = await response.Content.ReadFromJsonAsync<AddExampleSubjectResponse>();
+        var exampleSubjectDto = await response.Content.ReadFromJsonAsync<AddExampleSubjectResponse>(options: _jsonSerializerOptions);
 
         return exampleSubjectDto;
     }
     public async Task<ListAllExampleSubjectResponse> GetAllExampleSubjects(ListAllExampleSubjectRequest request)
     {
-        var uriBuilder = new UriBuilder($"{_httpClient.BaseAddress}/recognition/faces");
-        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-        query.AssignPropertyValue(request);
-        uriBuilder.Query = query.ToString();
-        var requestUrl = uriBuilder.ToString();
-
+        var queryBuilder = new QueryBuilder($"{_httpClient.BaseAddress}/recognition/faces");
+        var requestUrl = queryBuilder.SetQuery(request).Build();
+        
+        
         var response = await _httpClient.GetFromJsonAsync<ListAllExampleSubjectResponse>(
-            requestUrl);
+            requestUrl,
+            options: _jsonSerializerOptions);
 
         return response;
     }
