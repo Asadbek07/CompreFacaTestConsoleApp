@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;
 using Flurl.Http;
 using Microsoft.Extensions.Hosting;
@@ -45,31 +47,8 @@ public class Program
         var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
         var httpClient = httpClientFactory.CreateClient(Compreface);
         
-        var subjectService = new SubjectService(httpClient, jsonOptions);
+        var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
         
-            
-        var getAllSubjectResponse = await subjectService.GetAllSubject();
-    
-        foreach (var subject in getAllSubjectResponse.Subjects)
-        {
-    
-            Console.WriteLine(subject);
-    
-        }
-
-        
-        // TODO: Fix sending http request to Add Example Subject endpoint!!! 
-        // var addExampleSubjectRequest = new AddExampleSubjectRequest()
-        // {
-        //     DetProbThreShold = 0.81m,
-        //     FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\photo_2022-12-14_10-55-57.jpg",
-        //     Subject = "Asadbek Sindarov",
-        // };
-        //
-        // var addExampleSubjectResponse = await exampleSubjectService.AddExampleSubject(addExampleSubjectRequest);
-        //
-        // Console.WriteLine(addExampleSubjectResponse.Subject);
-        // Console.WriteLine(addExampleSubjectResponse.ImageId);
     }
 }

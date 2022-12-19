@@ -3,6 +3,8 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using Flurl;
+using Flurl.Http;
 using Shared;
 
 namespace ComprefaceTestApp.Services;
@@ -20,34 +22,32 @@ public class ExampleSubjectService
     
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
-        var queryBuilder = new QueryBuilder($"{_httpClient.BaseAddress}recognition/faces");
-        var requestUrl = queryBuilder
-            .SetQuery(request)
-            .Build();
-        
-        var multipartFormContent = new MultipartFormDataContent();
-        var fileStreamContent = new StreamContent(File.OpenRead(request.FilePath));
-        fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/*");
-        // fileStreamContent.Headers.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
-        multipartFormContent.Add(fileStreamContent, name: "file", fileName: request.FilePath);
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
-        var response =
-            await _httpClient.PostAsJsonAsync(requestUrl, multipartFormContent);
+        var response = await requestUrl
+            .SetQueryParams(new
+            {
+                subject = request.Subject,
+                det_prob_threshold = request.DetProbThreShold,
+            })
+            .PostMultipartAsync(mp =>
+                mp.AddFile("file", fileName: request.FileName, path: request.FilePath))
+            .ReceiveJson<AddExampleSubjectResponse>();
 
-        Console.WriteLine(response.RequestMessage);
-        var exampleSubjectDto = await response.Content.ReadFromJsonAsync<AddExampleSubjectResponse>(options: _jsonSerializerOptions);
-
-        return exampleSubjectDto;
+        return response;
     }
     public async Task<ListAllExampleSubjectResponse> GetAllExampleSubjects(ListAllExampleSubjectRequest request)
     {
-        var queryBuilder = new QueryBuilder($"{_httpClient.BaseAddress}/recognition/faces");
-        var requestUrl = queryBuilder.SetQuery(request).Build();
-        
-        
-        var response = await _httpClient.GetFromJsonAsync<ListAllExampleSubjectResponse>(
-            requestUrl,
-            options: _jsonSerializerOptions);
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+
+        var response = await requestUrl
+            .SetQueryParams(new
+            {
+                page = request.Page,
+                size = request.Size,
+                subject = request.Subject,
+            })
+            .GetJsonAsync<ListAllExampleSubjectResponse>();
 
         return response;
     }
