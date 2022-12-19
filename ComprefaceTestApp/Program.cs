@@ -1,8 +1,11 @@
 ﻿using System.Text.Json;
+using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using ComprefaceTestApp.Services;
+using Flurl.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Shared;
 using Shared.Constants;
 
 namespace ComprefaceTestApp;
@@ -25,17 +28,36 @@ public class Program
             })
             .Build();
 
-        var serviceProvider = host.Services;
-
-        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-        var httpClient = httpClientFactory.CreateClient(Compreface);
+        FlurlHttp.GlobalSettings.BeforeCall += call =>
+        {
+            call.Request.Headers.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+        };
+        
         var jsonOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
+
+        FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
+        
+        var serviceProvider = host.Services;
+
+        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+        var httpClient = httpClientFactory.CreateClient(Compreface);
         
         var subjectService = new SubjectService(httpClient, jsonOptions);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
+        
+            
+        var getAllSubjectResponse = await subjectService.GetAllSubject();
+    
+        foreach (var subject in getAllSubjectResponse.Subjects)
+        {
+    
+            Console.WriteLine(subject);
+    
+        }
+
         
         // TODO: Fix sending http request to Add Example Subject endpoint!!! 
         // var addExampleSubjectRequest = new AddExampleSubjectRequest()

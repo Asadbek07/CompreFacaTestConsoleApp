@@ -6,6 +6,7 @@ using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteAllSubjects;
 using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
+using Flurl.Http;
 
 namespace ComprefaceTestApp.Services;
 
@@ -22,12 +23,8 @@ public class SubjectService
 
     public async Task<GetAllSubjectResponse> GetAllSubject()
     {
-        var jsonOptions = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        };
-        
-        var response = await _httpClient.GetFromJsonAsync<GetAllSubjectResponse>("recognition/subjects/", options: _jsonSerializerOptions);
+        var requestUrl = _httpClient.BaseAddress + "recognition/subjects/";
+        var response = await requestUrl.GetJsonAsync<GetAllSubjectResponse>();
 
         return response;
     }
