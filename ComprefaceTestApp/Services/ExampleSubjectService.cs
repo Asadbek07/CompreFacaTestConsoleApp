@@ -1,9 +1,11 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using ComprefaceTestApp.DTOs;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
+using ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
@@ -75,5 +77,16 @@ public class ExampleSubjectService
             .DeleteAsync(HttpCompletionOption.ResponseContentRead);
 
         return await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteImageByIdResponse>();
+    }
+
+    public async Task<List<Face>> DeletMultipleExamples(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
+    {
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+
+        var response = await requestUrl
+            .AppendPathSegment("delete")
+            .SendJsonAsync(HttpMethod.Post, deleteMultipleExamplesRequest.ImageIdList.ToList().Select(x => x.ToString()).ToList());
+
+        return await response.ResponseMessage.Content.ReadFromJsonAsync<List<Face>>();
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Shared;
 using Shared.Constants;
+using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
 
 namespace ComprefaceTestApp;
 
@@ -47,8 +48,20 @@ public class Program
         var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
         var httpClient = httpClientFactory.CreateClient(Compreface);
 
-        //var subjectService = new SubjectService(httpClient);
+        var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
+
+        #region Delete multiple examples
+        //await exampleSubjectService.DeletMultipleExamples(
+        //    new DTOs.ExampleSubject.DeleteMultipleExamples.DeleteMultipleExamplesRequest()
+        //    {
+        //        ImageIdList= new List<Guid>
+        //        {
+        //            Guid.Parse("c5bc0e91-c3c1-45a0-87e3-5e3beff17106"),
+        //            Guid.Parse("8c8d909d-40a1-471d-ba2a-cd8200d85754")
+        //        }
+        //    });
+        #endregion
 
         #region Delete image by id
         //await exampleSubjectService.DeleteImageByIdAsync(new DTOs.ExampleSubject.DeleteImageById.DeleteImageByIdRequest
