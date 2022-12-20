@@ -1,7 +1,13 @@
 ﻿using System.Text.Json;
+using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;
+using Flurl.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Shared;
 using Shared.Constants;
 
 namespace ComprefaceTestApp;
@@ -24,30 +30,25 @@ public class Program
             })
             .Build();
 
-        var serviceProvider = host.Services;
-
-        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-        var httpClient = httpClientFactory.CreateClient(Compreface);
+        FlurlHttp.GlobalSettings.BeforeCall += call =>
+        {
+            call.Request.Headers.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+        };
+        
         var jsonOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
+
+        FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
         
-        var subjectService = new SubjectService(httpClient, jsonOptions);
+        var serviceProvider = host.Services;
+
+        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+        var httpClient = httpClientFactory.CreateClient(Compreface);
+        
+        var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
         
-        
-        // TODO: Fix sending http request to Add Example Subject endpoint!!! 
-        // var addExampleSubjectRequest = new AddExampleSubjectRequest()
-        // {
-        //     DetProbThreShold = 0.81m,
-        //     FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\photo_2022-12-14_10-55-57.jpg",
-        //     Subject = "Asadbek Sindarov",
-        // };
-        //
-        // var addExampleSubjectResponse = await exampleSubjectService.AddExampleSubject(addExampleSubjectRequest);
-        //
-        // Console.WriteLine(addExampleSubjectResponse.Subject);
-        // Console.WriteLine(addExampleSubjectResponse.ImageId);
     }
 }

@@ -96,3 +96,20 @@
 
 ```
 
+*Add Example Subject*
+
+```
+        var addExampleSubjectRequest = new AddExampleSubjectRequest()
+        {
+            DetProbThreShold = 0.81m,
+            FilePath = @"image path here",
+            Subject = "Asadbek Sindarov",
+            FileName = "file name" // Guid.NewGuid().ToString(),
+        };
+    
+        var addExampleSubjectResponse = await exampleSubjectService.AddExampleSubject(addExampleSubjectRequest);
+    
+        Console.WriteLine(addExampleSubjectResponse.Subject);
+        Console.WriteLine(addExampleSubjectResponse.ImageId);
+```
+

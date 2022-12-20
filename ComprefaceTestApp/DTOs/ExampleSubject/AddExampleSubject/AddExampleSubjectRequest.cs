@@ -6,8 +6,9 @@ public class AddExampleSubjectRequest
 {
     public string Subject { get; set; }
     
-    [JsonPropertyName("det_prob_threshold")]
     public decimal? DetProbThreShold { get; set; }
 
     public string FilePath { get; set; }
+
+    public string FileName { get; set; }
 }
