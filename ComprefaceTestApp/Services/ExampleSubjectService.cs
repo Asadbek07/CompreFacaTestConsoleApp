@@ -12,12 +12,10 @@ namespace ComprefaceTestApp.Services;
 public class ExampleSubjectService
 {
     private readonly HttpClient _httpClient;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-    public ExampleSubjectService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
+    public ExampleSubjectService(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _jsonSerializerOptions = jsonSerializerOptions;
     }
     
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)

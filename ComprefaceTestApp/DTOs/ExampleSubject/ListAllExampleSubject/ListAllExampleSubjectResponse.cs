@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using ComprefaceTestApp.DTOs.HelperDTOs;
 
 namespace ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 

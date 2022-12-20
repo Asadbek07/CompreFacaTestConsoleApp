@@ -113,3 +113,35 @@
         Console.WriteLine(addExampleSubjectResponse.ImageId);
 ```
 
+
+**Recognition Service**
+
+*Recognize faces from a given image*
+
+```
+var recognizeFaceFromImageRequest = new RecognizeFaceFromImageRequest()
+        {
+            FileName = Guid.NewGuid().ToString() + ".jpg", // file name here....
+            FilePath = "", // file path
+            DetProbThreshold = 0.85m,
+            FacePlugins = new List<string>()
+            {
+                "landmarks",
+                "gender",
+                "age",
+            },
+            Status = true,
+        };
+
+        var recognizeFaceFromImageResponse =
+            await recognitionService.RecognizeFaceFromImage(recognizeFaceFromImageRequest);
+
+        foreach (var result in recognizeFaceFromImageResponse.Result)
+        {
+            foreach (var subject in result.Subjects)
+            {
+                Console.WriteLine($"Subject : {subject.Subject}");
+                Console.WriteLine($"Similarity: {subject.Similarity}");
+            }
+        }
+```
