@@ -50,9 +50,11 @@ public class Program
         //var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
 
-        await exampleSubjectService.ClearSubjectAsync(new DTOs.ExampleSubject.DeleteAllSubjectExamples.DeleteAllExamplesRequest()
-        {
-            Subject = "Stars"
-        });
+        #region Clear subject
+        //await exampleSubjectService.ClearSubjectAsync(new DTOs.ExampleSubject.DeleteAllSubjectExamples.DeleteAllExamplesRequest()
+        //{
+        //    Subject = "Stars"
+        //});
+        #endregion
     }
 }
