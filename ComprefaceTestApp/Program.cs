@@ -15,7 +15,7 @@ namespace ComprefaceTestApp;
 public class Program
 {
     private static string Compreface => nameof(Compreface);
-    
+
     static async Task Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
@@ -34,21 +34,29 @@ public class Program
         {
             call.Request.Headers.Add("x-api-key", "e468da55-b884-4865-8c83-f1ad5775f00d");
         };
-        
+
         var jsonOptions = new JsonSerializerOptions()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
 
         FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
-        
+
         var serviceProvider = host.Services;
 
         var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
         var httpClient = httpClientFactory.CreateClient(Compreface);
-        
+
         //var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
+
+        #region Delete image by id
+        //await exampleSubjectService.DeleteImageByIdAsync(new DTOs.ExampleSubject.DeleteImageById.DeleteImageByIdRequest
+        //{
+        //    ImageId = Guid.Parse("c3dd56c2-1a51-450f-800f-b9fe230a9a7a")
+        //}
+        //    );
+        #endregion
 
         #region Clear subject
         //await exampleSubjectService.ClearSubjectAsync(new DTOs.ExampleSubject.DeleteAllSubjectExamples.DeleteAllExamplesRequest()
