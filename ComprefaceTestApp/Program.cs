@@ -25,14 +25,14 @@ public class Program
                 {
                     client.BaseAddress = new Uri(RequestConstants.BaseUrl);
                     client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-                    client.DefaultRequestHeaders.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+                    client.DefaultRequestHeaders.Add("x-api-key", "e468da55-b884-4865-8c83-f1ad5775f00d");
                 });
             })
             .Build();
 
         FlurlHttp.GlobalSettings.BeforeCall += call =>
         {
-            call.Request.Headers.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+            call.Request.Headers.Add("x-api-key", "e468da55-b884-4865-8c83-f1ad5775f00d");
         };
         
         var jsonOptions = new JsonSerializerOptions()
@@ -47,8 +47,12 @@ public class Program
         var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
         var httpClient = httpClientFactory.CreateClient(Compreface);
         
-        var subjectService = new SubjectService(httpClient);
+        //var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
-        
+
+        await exampleSubjectService.ClearSubjectAsync(new DTOs.ExampleSubject.DeleteAllSubjectExamples.DeleteAllExamplesRequest()
+        {
+            Subject = "Stars"
+        });
     }
 }

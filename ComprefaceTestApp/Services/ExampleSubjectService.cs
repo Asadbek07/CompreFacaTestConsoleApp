@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
@@ -36,6 +37,7 @@ public class ExampleSubjectService
 
         return response;
     }
+
     public async Task<ListAllExampleSubjectResponse> GetAllExampleSubjects(ListAllExampleSubjectRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
@@ -50,5 +52,16 @@ public class ExampleSubjectService
             .GetJsonAsync<ListAllExampleSubjectResponse>();
 
         return response;
+    }
+
+    public async Task<DeleteAllExamplesResponse> ClearSubjectAsync(DeleteAllExamplesRequest request)
+    {
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+
+        var response = await requestUrl.
+            SetQueryParam("subject", request.Subject)
+            .DeleteAsync(HttpCompletionOption.ResponseContentRead);
+
+        return await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteAllExamplesResponse>();
     }
 }
