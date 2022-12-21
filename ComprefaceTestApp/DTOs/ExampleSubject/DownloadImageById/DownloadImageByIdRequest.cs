@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById
 {
-    public class DownloadImageByIdRequest
+    public class DownloadImageByIdRequest : ImageBase
     {
-        [JsonPropertyName("image_id")]
-        public Guid ImageId { get; set; }
-
         [JsonPropertyName("recognition_api_key")]
         public Guid ApiKey { get; set; }
     }

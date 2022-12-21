@@ -5,9 +5,11 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById
+namespace ComprefaceTestApp.DTOs
 {
-    public class DeleteImageByIdRequest : ImageBase
+    public class ImageBase
     {
+        [JsonPropertyName("image_id")]
+        public Guid ImageId { get; set; }
     }
 }

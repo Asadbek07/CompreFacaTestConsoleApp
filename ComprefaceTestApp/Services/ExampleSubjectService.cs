@@ -7,6 +7,7 @@ using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById;
+using ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageBySubjectId;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
@@ -97,6 +98,17 @@ public class ExampleSubjectService
 
         var response = await requestUrl
             .AppendPathSegments(downloadImageByIdRequest.ApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
+            .GetBytesAsync(HttpCompletionOption.ResponseContentRead);
+
+        return response;
+    }
+
+    public async Task<byte[]> DownloadImageBySubjectIdAsync(DownloadImageBySubjectIdRequest downloadImageBySubjectIdRequest)
+    {
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+
+        var response = await requestUrl
+            .AppendPathSegments(downloadImageBySubjectIdRequest.ImageId.ToString(), "/img")
             .GetBytesAsync(HttpCompletionOption.ResponseContentRead);
 
         return response;

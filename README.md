@@ -153,3 +153,12 @@ await exampleSubjectService.DeletMultipleExamples(
             });
 ```
 
+*Download an Image example of the Subject by ID*
+```
+        await exampleSubjectService.DownloadImageBySubjectIdAsync(
+            new DTOs.ExampleSubject.DownloadImageBySubjectId.DownloadImageBySubjectIdRequest()
+            {
+                ImageId = Guid.Parse("e0053da2-e0a1-4b6e-b647-5d7108e42aea")
+            });
+```
+

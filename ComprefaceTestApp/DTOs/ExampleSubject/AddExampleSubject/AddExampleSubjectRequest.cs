@@ -1,9 +1,7 @@
 ﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 
-public class AddExampleSubjectRequest
+public class AddExampleSubjectRequest : SubjectBase
 {
-    public string Subject { get; set; }
-    
     public decimal? DetProbThreShold { get; set; }
 
     public string FilePath { get; set; }

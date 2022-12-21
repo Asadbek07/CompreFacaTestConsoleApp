@@ -2,10 +2,6 @@
 
 namespace ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 
-public class AddExampleSubjectResponse
+public class AddExampleSubjectResponse : Face
 {
-    [JsonPropertyName("image_id")]
-    public Guid ImageId { get; set; }
-
-    public string Subject { get; set; }
 }
