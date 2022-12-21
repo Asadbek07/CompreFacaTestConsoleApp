@@ -11,16 +11,9 @@ namespace ComprefaceTestApp.Services;
 
 public class RecognitionService
 {
-    private readonly HttpClient _httpClient;
-
-    public RecognitionService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
     public async Task<RecognizeFaceFromImageResponse> RecognizeFaceFromImage(RecognizeFaceFromImageRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/recognize";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/recognize";
 
         var response = await requestUrl
             .SetQueryParams(new

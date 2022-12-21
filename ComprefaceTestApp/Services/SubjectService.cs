@@ -5,21 +5,15 @@ using ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using Flurl.Http;
+using Shared.Constants;
 
 namespace ComprefaceTestApp.Services;
 
 public class SubjectService
 {
-    private readonly HttpClient _httpClient;
-    
-    public SubjectService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
     public async Task<GetAllSubjectResponse> GetAllSubject()
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/subjects/";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/subjects/";
         var response = await requestUrl.GetJsonAsync<GetAllSubjectResponse>();
 
         return response;
@@ -27,7 +21,7 @@ public class SubjectService
 
     public async Task<AddSubjectResponse> AddSubject(AddSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/subjects";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/subjects";
 
         var response = await requestUrl.PostJsonAsync(request);
         var subjectDto = await response.ResponseMessage.Content.ReadFromJsonAsync<AddSubjectResponse>();
@@ -37,7 +31,7 @@ public class SubjectService
 
     public async Task<RenameSubjectResponse> RenameSubject(RenameSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/subjects/{request.CurrentSubject}";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/subjects/{request.CurrentSubject}";
         var response = await requestUrl
             .PutJsonAsync(request.Subject);
         
@@ -48,7 +42,7 @@ public class SubjectService
 
     public async Task<DeleteSubjectResponse> DeleteSubject(DeleteSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/subjects/{request.ActualSubject}";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/subjects/{request.ActualSubject}";
 
         var response = await requestUrl.DeleteAsync();
         
@@ -59,7 +53,7 @@ public class SubjectService
 
     public async Task<DeleteAllSubjectsResponse> DeleteAllSubjects()
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/subjects";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/subjects";
 
         var response = await requestUrl.DeleteAsync();
 

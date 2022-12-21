@@ -50,11 +50,8 @@ public class Program
 
         var serviceProvider = host.Services;
 
-        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-        var httpClient = httpClientFactory.CreateClient(Compreface);
-
-        var subjectService = new SubjectService(httpClient);
-        var exampleSubjectService = new ExampleSubjectService(httpClient);
-        var recognitionService = new RecognitionService(httpClient);
+        var subjectService = new SubjectService();
+        var exampleSubjectService = new ExampleSubjectService();
+        var recognitionService = new RecognitionService();
     }
 }
