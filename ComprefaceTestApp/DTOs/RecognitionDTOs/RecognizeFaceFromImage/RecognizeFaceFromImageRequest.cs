@@ -1,4 +1,6 @@
-﻿namespace ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
+﻿using System.Text.Json.Serialization;
+
+namespace ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
 
 public class RecognizeFaceFromImageRequest
 {

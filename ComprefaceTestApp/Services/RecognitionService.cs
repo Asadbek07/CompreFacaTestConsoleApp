@@ -28,11 +28,9 @@ public class RecognitionService
                 status = request.Status,
             })
             .PostMultipartAsync(mp =>
-                mp.AddFile("file", fileName: request.FileName, path: request.FilePath));
+                mp.AddFile("file", fileName: request.FileName, path: request.FilePath))
+            .ReceiveJson<RecognizeFaceFromImageResponse>();
 
-        var result = 
-            await response.ResponseMessage.Content.ReadFromJsonAsync<RecognizeFaceFromImageResponse>();
-
-        return result;
+        return response;
     }
 }

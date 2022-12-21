@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Shared;
 using Shared.Constants;
+using Shared.CustomJSONSerializer;
 
 namespace ComprefaceTestApp;
 
@@ -26,8 +27,8 @@ public class Program
                 {
                     client.BaseAddress = new Uri(RequestConstants.BaseUrl);
                     client.DefaultRequestHeaders.Add("User-Agent",
-                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-                    client.DefaultRequestHeaders.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+                        RequestConstants.UserAgent);
+                    client.DefaultRequestHeaders.Add("x-api-key", RequestConstants.API_KEY);
                 });
             })
             .Build();
@@ -39,7 +40,8 @@ public class Program
 
         var jsonOptions = new JsonSerializerOptions()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNamingPolicy = SnakeCaseToCamelCaseNamingPolicy.Policy,
+            PropertyNameCaseInsensitive = true,
         };
 
         FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
@@ -56,19 +58,21 @@ public class Program
         var recognizeFaceFromImageRequest = new RecognizeFaceFromImageRequest()
         {
             FileName = Guid.NewGuid().ToString() + ".jpg",
-            FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\photo_2022-12-14_10-55-57.jpg",
+            FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\Asadbek Sindarov.jpg",
+            Limit = 2,
             DetProbThreshold = 0.85m,
             FacePlugins = new List<string>()
             {
-                "landmarks",
-                "gender",
                 "age",
+                "mask",
+                "calculator",
+                "detector",
+                "gender"
             },
             Status = true,
         };
 
-        var recognizeFaceFromImageResponse =
-            await recognitionService.RecognizeFaceFromImage(recognizeFaceFromImageRequest);
+        var recognizeFaceFromImageResponse = await recognitionService.RecognizeFaceFromImage(recognizeFaceFromImageRequest);
 
         foreach (var result in recognizeFaceFromImageResponse.Result)
         {
@@ -78,5 +82,12 @@ public class Program
                 Console.WriteLine($"Similarity: {subject.Similarity}");
             }
         }
+        
+        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Age);
+        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Gender);
+        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Calculator);
+        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Detector);
+        
+
     }
 }
