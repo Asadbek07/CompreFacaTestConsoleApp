@@ -54,40 +54,5 @@ public class Program
         var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient);
         var recognitionService = new RecognitionService(httpClient);
-
-        var recognizeFaceFromImageRequest = new RecognizeFaceFromImageRequest()
-        {
-            FileName = Guid.NewGuid().ToString() + ".jpg",
-            FilePath = @"C:\Users\asindarov\Desktop\Personal\Photo\Asadbek Sindarov.jpg",
-            Limit = 2,
-            DetProbThreshold = 0.85m,
-            FacePlugins = new List<string>()
-            {
-                "age",
-                "mask",
-                "calculator",
-                "detector",
-                "gender"
-            },
-            Status = true,
-        };
-
-        var recognizeFaceFromImageResponse = await recognitionService.RecognizeFaceFromImage(recognizeFaceFromImageRequest);
-
-        foreach (var result in recognizeFaceFromImageResponse.Result)
-        {
-            foreach (var subject in result.Subjects)
-            {
-                Console.WriteLine($"Subject : {subject.Subject}");
-                Console.WriteLine($"Similarity: {subject.Similarity}");
-            }
-        }
-        
-        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Age);
-        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Gender);
-        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Calculator);
-        Console.WriteLine(recognizeFaceFromImageResponse.PluginsVersions.Detector);
-        
-
     }
 }
