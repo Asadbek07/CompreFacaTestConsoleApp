@@ -8,5 +8,5 @@ public class Face
     public Guid ImageId { get; set; }
 
     [JsonPropertyName("subject")]
-    public string Subject{ get; set; }
+    public string? Subject{ get; set; }
 }

@@ -9,6 +9,6 @@ namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples
 {
     public class DeleteMultipleExamplesRequest
     {
-        public IList<Guid> ImageIdList { get; set; }
+        public IList<Guid>? ImageIdList { get; set; }
     }
 }

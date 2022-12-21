@@ -1,6 +1,5 @@
 ﻿namespace ComprefaceTestApp.DTOs.SubjectDTOs.DeleteSubject;
 
-public class DeleteSubjectResponse
+public class DeleteSubjectResponse : SubjectBase
 {
-    public string Subject { get; set; }
 }

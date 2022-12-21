@@ -1,6 +1,5 @@
 ﻿namespace ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
 
-public class AddSubjectResponse
+public class AddSubjectResponse : SubjectBase
 {
-    public string Subject { get; set; }
 }

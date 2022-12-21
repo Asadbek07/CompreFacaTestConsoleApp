@@ -59,7 +59,7 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<DeleteAllExamplesResponse> ClearSubjectAsync(DeleteAllExamplesRequest request)
+    public async Task<DeleteAllExamplesResponse?> ClearSubjectAsync(DeleteAllExamplesRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
@@ -70,7 +70,7 @@ public class ExampleSubjectService
         return await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteAllExamplesResponse>();
     }
 
-    public async Task<DeleteImageByIdResponse> DeleteImageByIdAsync(DeleteImageByIdRequest request)
+    public async Task<DeleteImageByIdResponse?> DeleteImageByIdAsync(DeleteImageByIdRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
