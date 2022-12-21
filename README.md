@@ -174,3 +174,57 @@ var imageBytes = await File.ReadAllBytesAsync("file path");
             
         }
 ```
+
+*Verify Faces from a Given Image*
+
+```
+var verifyFacesFromImageRequest = new VerifyFacesFromImageRequest()
+        {
+            DetProbThreshold = 0.85m,
+            FacePlugins = new List<string>()
+            {
+                "age",
+                "gender",
+                "mask",
+                "calculator",
+            },
+            FilePath = file path here,
+            FileName = Guid.NewGuid().ToString() + ".jpg",
+            ImageId = image_id here
+        };
+
+        var verifyFacesFromImageResponse = await recognitionService.VerifyFacesFromImage(verifyFacesFromImageRequest);
+
+        foreach (var result in verifyFacesFromImageResponse.Result)
+        {
+            
+        }
+```
+
+```
+var imageBytes = File.ReadAllBytes("file path here");
+
+        var base64ImageValue = Convert.ToBase64String(imageBytes);
+        var verifyFacesFromImageWithBase64Request = new VerifyFacesFromImageWithBase64Request()
+        {
+            DetProbThreshold = 0.85m,
+            FacePlugins = new List<string>()
+            {
+                "age",
+                "mask",
+                "gender",
+                "detector",
+                "calculator",
+            },
+            FileBase64Value = base64ImageValue,
+            ImageId = image_id here,
+        };
+
+        var verifyFacesFromImageResponse =
+            await recognitionService.VerifyFacesFromBase64File(verifyFacesFromImageWithBase64Request);
+
+        foreach (var result in verifyFacesFromImageResponse.Result)
+        {
+            
+        }
+```

@@ -1,12 +1,10 @@
-﻿namespace ComprefaceTestApp.DTOs.RecognitionDTOs;
+﻿namespace ComprefaceTestApp.DTOs.RecognitionDTOs.BaseRequests;
 
-public class BaseRecognizeFaceFromImageRequest
+public class BaseRecognitionRequest
 {
     public int? Limit { get; set; }
 
     public decimal DetProbThreshold { get; set; }
-
-    public int? PredictionCount { get; set; }
 
     public IList<string> FacePlugins { get; set; }
 

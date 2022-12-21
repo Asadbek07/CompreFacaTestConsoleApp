@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.BaseRequests;
 
 namespace ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
 
