@@ -28,14 +28,13 @@ public class Program
                     client.BaseAddress = new Uri(RequestConstants.BaseUrl);
                     client.DefaultRequestHeaders.Add("User-Agent",
                         RequestConstants.UserAgent);
-                    client.DefaultRequestHeaders.Add("x-api-key", RequestConstants.API_KEY);
                 });
             })
             .Build();
 
         FlurlHttp.GlobalSettings.BeforeCall += call =>
         {
-            call.Request.Headers.Add("x-api-key", "746f45a6-b35e-4087-a79a-a686b3c47fb7");
+            call.Request.Headers.Add("x-api-key", RequestConstants.API_KEY);
         };
 
         var jsonOptions = new JsonSerializerOptions()
