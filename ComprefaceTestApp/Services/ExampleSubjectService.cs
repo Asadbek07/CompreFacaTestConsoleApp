@@ -6,6 +6,7 @@ using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples;
+using ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
@@ -23,7 +24,7 @@ public class ExampleSubjectService
         _httpClient = httpClient;
         _jsonSerializerOptions = jsonSerializerOptions;
     }
-    
+
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
@@ -88,5 +89,16 @@ public class ExampleSubjectService
             .SendJsonAsync(HttpMethod.Post, deleteMultipleExamplesRequest.ImageIdList.ToList().Select(x => x.ToString()).ToList());
 
         return await response.ResponseMessage.Content.ReadFromJsonAsync<List<Face>>();
+    }
+
+    public async Task<byte[]> DownloadImageByIdAsync(DownloadImageByIdRequest downloadImageByIdRequest)
+    {
+        var requestUrl = $"{_httpClient.BaseAddress}static";
+
+        var response = await requestUrl
+            .AppendPathSegments(downloadImageByIdRequest.ApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
+            .GetBytesAsync(HttpCompletionOption.ResponseContentRead);
+
+        return response;
     }
 }
