@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ComprefaceTestApp.DTOs
 {
-    internal class Subject
+    public class SubjectBase
     {
+        public string Subject { get; set; }
     }
 }

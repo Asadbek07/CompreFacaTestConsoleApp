@@ -50,12 +50,5 @@ public class Program
 
         var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
-
-        await exampleSubjectService.DownloadImageByIdAsync(
-            new DTOs.ExampleSubject.DownloadImageById.DownloadImageByIdRequest()
-            {
-                ApiKey = Guid.Parse("e468da55-b884-4865-8c83-f1ad5775f00d"),
-                ImageId = Guid.Parse("e0053da2-e0a1-4b6e-b647-5d7108e42aea")
-            });
     }
 }
