@@ -2,6 +2,7 @@
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFacesFromImageWithBase64;
 using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
 using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;

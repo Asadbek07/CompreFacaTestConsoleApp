@@ -145,3 +145,32 @@ var recognizeFaceFromImageRequest = new RecognizeFaceFromImageRequest()
             }
         }
 ```
+
+*Base64, Recognize Faces from a Given Image*
+
+```
+var imageBytes = await File.ReadAllBytesAsync("file path");
+
+        var base64ImageValue = Convert.ToBase64String(imageBytes);
+
+        var recognizeFacesFromImageWithBase64Request = new RecognizeFacesFromImageWithBase64Request()
+        {
+            FileBase64Value = base64ImageValue,
+            DetProbThreshold = 0.85m,
+            FacePlugins = new List<string>()
+            {
+                "landmarks",
+                "gender",
+                "age",
+            },
+            Status = true,
+        };
+
+        var recognizeFaceFromImageResponse =
+            await recognitionService.RecognizeFaceFromBase64File(recognizeFacesFromImageWithBase64Request);
+
+        foreach (var result in recognizeFaceFromImageResponse.Result)
+        {
+            
+        }
+```
