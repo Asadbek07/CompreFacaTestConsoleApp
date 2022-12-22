@@ -132,7 +132,7 @@
 
 *Delete multiple examples*
 ```
-await exampleSubjectService.DeletMultipleExamples(
+await exampleSubjectService.DeletMultipleExamplesAsync(
             new DTOs.ExampleSubject.DeleteMultipleExamples.DeleteMultipleExamplesRequest()
             {
                 ImageIdList = new List<Guid>
