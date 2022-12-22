@@ -60,7 +60,7 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<DeleteAllExamplesResponse?> ClearSubjectAsync(DeleteAllExamplesRequest request)
+    public async Task<DeleteAllExamplesResponse> ClearSubjectAsync(DeleteAllExamplesRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
@@ -100,7 +100,7 @@ public class ExampleSubjectService
         var requestUrl = $"{_httpClient.BaseAddress}static";
 
         var response = await requestUrl
-            .AppendPathSegments(downloadImageByIdRequest.ApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
+            .AppendPathSegments(downloadImageByIdRequest.RecognitionApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
             .GetBytesAsync();
 
         return response;

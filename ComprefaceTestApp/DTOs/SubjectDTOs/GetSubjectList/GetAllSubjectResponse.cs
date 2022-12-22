@@ -4,5 +4,5 @@ namespace ComprefaceTestApp.DTOs.SubjectDTOs.GetSubjectList;
 
 public class GetAllSubjectResponse
 {
-    public IList<string>? Subjects { get; set; }
+    public IList<string> Subjects { get; set; }
 }

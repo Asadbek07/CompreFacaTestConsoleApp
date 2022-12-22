@@ -9,7 +9,6 @@ namespace ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById
 {
     public class DownloadImageByIdRequest : ImageBase
     {
-        [JsonPropertyName("recognition_api_key")]
-        public Guid ApiKey { get; set; }
+        public Guid RecognitionApiKey { get; set; }
     }
 }
