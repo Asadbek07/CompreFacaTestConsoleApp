@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using ComprefaceTestApp.DTOs;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
@@ -70,26 +71,28 @@ public class ExampleSubjectService
         return await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteAllExamplesResponse>();
     }
 
-    public async Task<DeleteImageByIdResponse?> DeleteImageByIdAsync(DeleteImageByIdRequest request)
+    public async Task<DeleteImageByIdResponse> DeleteImageByIdAsync(DeleteImageByIdRequest request)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment(request.ImageId.ToString())
-            .DeleteAsync(HttpCompletionOption.ResponseContentRead);
+            .DeleteAsync()
+            .ReceiveJson<DeleteImageByIdResponse>();
 
-        return await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteImageByIdResponse>();
+        return response;
     }
 
-    public async Task<List<Face>> DeletMultipleExamples(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
+    public async Task<List<Face>> DeletMultipleExamplesAsync(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment("delete")
-            .SendJsonAsync(HttpMethod.Post, deleteMultipleExamplesRequest.ImageIdList.ToList().Select(x => x.ToString()).ToList());
+            .PostJsonAsync(deleteMultipleExamplesRequest.ImageIdList)
+            .ReceiveJson<List<Face>>();
 
-        return await response.ResponseMessage.Content.ReadFromJsonAsync<List<Face>>();
+        return response;
     }
 
     public async Task<byte[]> DownloadImageByIdAsync(DownloadImageByIdRequest downloadImageByIdRequest)
@@ -98,7 +101,7 @@ public class ExampleSubjectService
 
         var response = await requestUrl
             .AppendPathSegments(downloadImageByIdRequest.ApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
-            .GetBytesAsync(HttpCompletionOption.ResponseContentRead);
+            .GetBytesAsync();
 
         return response;
     }
@@ -109,7 +112,7 @@ public class ExampleSubjectService
 
         var response = await requestUrl
             .AppendPathSegments(downloadImageBySubjectIdRequest.ImageId.ToString(), "/img")
-            .GetBytesAsync(HttpCompletionOption.ResponseContentRead);
+            .GetBytesAsync();
 
         return response;
     }

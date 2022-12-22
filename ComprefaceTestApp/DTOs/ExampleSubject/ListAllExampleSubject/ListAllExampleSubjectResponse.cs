@@ -4,7 +4,7 @@ namespace ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 
 public class ListAllExampleSubjectResponse
 {
-    public IList<Face> Faces { get; set; }
+    public IList<Face>? Faces { get; set; }
 
     [JsonPropertyName("page_number")]
     public int PageNumber { get; set; }

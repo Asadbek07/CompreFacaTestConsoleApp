@@ -50,5 +50,15 @@ public class Program
 
         var subjectService = new SubjectService(httpClient);
         var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
+
+        await exampleSubjectService.DeletMultipleExamplesAsync(
+            new DTOs.ExampleSubject.DeleteMultipleExamples.DeleteMultipleExamplesRequest()
+            {
+                ImageIdList = new List<Guid>
+                {
+                    Guid.Parse("00dd5f76-b9eb-4ae9-968f-c9e433c90543"),
+                    Guid.Parse("8c9b02a6-5380-4275-beaa-c37ef12bdcfb")
+                }
+            });
     }
 }
