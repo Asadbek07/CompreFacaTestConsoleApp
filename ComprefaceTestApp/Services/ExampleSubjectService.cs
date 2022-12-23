@@ -81,14 +81,14 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<List<Face>> DeletMultipleExamplesAsync(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
+    public async Task<DeleteMultipleExamplesResponse> DeletMultipleExamplesAsync(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment("delete")
             .PostJsonAsync(deleteMultipleExamplesRequest.ImageIdList)
-            .ReceiveJson<List<Face>>();
+            .ReceiveJson<DeleteMultipleExamplesResponse>();
 
         return response;
     }

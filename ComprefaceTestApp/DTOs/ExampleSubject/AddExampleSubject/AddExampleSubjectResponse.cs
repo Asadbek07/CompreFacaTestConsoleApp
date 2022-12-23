@@ -2,6 +2,7 @@
 
 namespace ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 
-public class AddExampleSubjectResponse : Face
+public class AddExampleSubjectResponse
 {
+    public string Subject { get; set; }
 }

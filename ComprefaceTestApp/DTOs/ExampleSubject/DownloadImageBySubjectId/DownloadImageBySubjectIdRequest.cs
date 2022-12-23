@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageBySubjectId
 {
-    public class DownloadImageBySubjectIdRequest : ImageBase
+    public class DownloadImageBySubjectIdRequest
     {
+        public Guid ImageId { get; set; }
     }
 }

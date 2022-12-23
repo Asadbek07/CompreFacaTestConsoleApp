@@ -1,6 +1,7 @@
 ﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples
 {
-    public class DeleteAllExamplesRequest : SubjectBase
+    public class DeleteAllExamplesRequest
     {
+        public string Subject { get; set; }
     }
 }
