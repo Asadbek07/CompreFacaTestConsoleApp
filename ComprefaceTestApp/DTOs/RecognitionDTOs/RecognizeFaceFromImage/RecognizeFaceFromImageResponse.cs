@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using ComprefaceTestApp.DTOs.HelperDTOs;
+﻿using ComprefaceTestApp.DTOs.HelperDTOs;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.BaseRequests;
 
 namespace ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
 
@@ -10,19 +10,7 @@ public class RecognizeFaceFromImageResponse
     public PluginVersions PluginsVersions { get; set; }
 }
 
-public class Result
+public class Result : BaseResult
 {
-    public Age Age { get; set; }
-
-    public Gender Gender { get; set; }
-
-    public Box Box { get; set; }
-    
     public IList<SimilarSubject> Subjects { get; set; }
-
-    public IList<List<int>> Landmarks { get; set; }
-    
-    public ExecutionTime ExecutionTime { get; set; }
-    
-    public IList<decimal> Embedding { get; set; }
 }

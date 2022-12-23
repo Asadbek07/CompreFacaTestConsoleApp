@@ -1,4 +1,5 @@
 ﻿using ComprefaceTestApp.DTOs.HelperDTOs;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.BaseRequests;
 
 namespace ComprefaceTestApp.DTOs.RecognitionDTOs.VerifyFacesFromImage;
 
@@ -9,24 +10,10 @@ public class VerifyFacesFromImageResponse
     public PluginVersions PluginsVersions { get; set; }
 }
 
-public class Result
+public class Result : BaseResult
 {
-    public Box Box { get; set; }
-
     public string Subject { get; set; }
     
     public decimal Similarity { get; set; }
-    
-    public Age Age { get; set; }
-
-    public Gender Gender { get; set; }
-
-    public Mask Mask { get; set; }
-
-    public IList<decimal> Embedding { get; set; }
-
-    public IList<IList<decimal>> Landmarks { get; set; }
-
-    public ExecutionTime ExecutionTime { get; set; }
 }
 
