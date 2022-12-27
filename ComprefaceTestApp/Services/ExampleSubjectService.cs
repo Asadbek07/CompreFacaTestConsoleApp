@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using ComprefaceTestApp.Configuration;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
@@ -11,18 +12,16 @@ namespace ComprefaceTestApp.Services;
 
 public class ExampleSubjectService
 {
-    private readonly HttpClient _httpClient;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
-
-    public ExampleSubjectService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
+    private readonly ComprefaceConfiguration _comprefaceConfiguration;
+    
+    public ExampleSubjectService(ComprefaceConfiguration comprefaceConfiguration)
     {
-        _httpClient = httpClient;
-        _jsonSerializerOptions = jsonSerializerOptions;
+        _comprefaceConfiguration = comprefaceConfiguration;
     }
     
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{_comprefaceConfiguration.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .SetQueryParams(new
@@ -38,7 +37,7 @@ public class ExampleSubjectService
     }
     public async Task<ListAllExampleSubjectResponse> GetAllExampleSubjects(ListAllExampleSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{_comprefaceConfiguration.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .SetQueryParams(new
