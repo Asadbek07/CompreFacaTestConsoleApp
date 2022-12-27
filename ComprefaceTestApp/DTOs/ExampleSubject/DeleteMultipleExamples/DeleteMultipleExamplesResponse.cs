@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples
 {
     public class DeleteMultipleExamplesResponse
     {

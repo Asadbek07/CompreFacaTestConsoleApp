@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using ComprefaceTestApp.DTOs;
+using ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
@@ -38,6 +39,22 @@ public class ExampleSubjectService
             .PostMultipartAsync(mp =>
                 mp.AddFile("file", fileName: request.FileName, path: request.FilePath))
             .ReceiveJson<AddExampleSubjectResponse>();
+
+        return response;
+    }
+
+    public async Task<AddBase64ExampleSubjectResponse> AddBase64ExampleSubjectAsync(AddBase64ExampleSubjectRequest request)
+    {
+        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+
+         var response = await requestUrl
+            .SetQueryParams(new
+            {
+                subject = request.Subject,
+                det_prob_threshold = request.DetProbThreShold,
+            })
+            .PostJsonAsync(request.File)
+            .ReceiveJson<AddBase64ExampleSubjectResponse>();
 
         return response;
     }
@@ -81,7 +98,7 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<DeleteMultipleExamplesResponse> DeletMultipleExamplesAsync(DeleteMultipleExamplesRequest deleteMultipleExamplesRequest)
+    public async Task<DeleteMultipleExamplesResponse> DeletMultipleExamplesAsync(DeleteMultipleExampleRequest deleteMultipleExamplesRequest)
     {
         var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
 
