@@ -31,6 +31,7 @@ public class Program
         var serviceProvider = host.Services;
 
         var comprefaceConfiguration = serviceProvider.GetRequiredService<IOptions<ComprefaceConfiguration>>().Value;
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
         
         FlurlHttp.GlobalSettings.BeforeCall += call =>
         {
@@ -43,9 +44,5 @@ public class Program
         };
 
         FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
-        
-        var subjectService = new SubjectService(comprefaceConfiguration);
-        var exampleSubjectService = new ExampleSubjectService(comprefaceConfiguration);
-        await subjectService.GetAllSubject();
     }
 }
