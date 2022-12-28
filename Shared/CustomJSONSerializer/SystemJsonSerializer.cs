@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Flurl.Http.Configuration;
 
-namespace Shared;
+namespace Shared.CustomJSONSerializer;
 
 public class SystemJsonSerializer : ISerializer
 {

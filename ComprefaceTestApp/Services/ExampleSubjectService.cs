@@ -1,12 +1,8 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Json;
-using ComprefaceTestApp.Configuration;
+﻿using ComprefaceTestApp.Configuration;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
-using Shared;
 
 namespace ComprefaceTestApp.Services;
 
