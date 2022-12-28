@@ -44,5 +44,7 @@ public class Program
         };
 
         FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
+        
+        var comprefaceClient = new ComprefaceClient(configuration: configuration, "Compreface:ApiKey", "Compreface:BaseUrl");
     }
 }
