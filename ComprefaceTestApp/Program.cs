@@ -15,6 +15,7 @@ using Shared;
 using Shared.Constants;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject;
 using Shared.CustomJSONSerializer;
+using ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples;
 
 namespace ComprefaceTestApp;
 

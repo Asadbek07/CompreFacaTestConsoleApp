@@ -17,15 +17,6 @@ namespace ComprefaceTestApp.Services;
 
 public class ExampleSubjectService
 {
-    private readonly HttpClient _httpClient;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
-
-    public ExampleSubjectService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
-    {
-        _httpClient = httpClient;
-        _jsonSerializerOptions = jsonSerializerOptions;
-    }
-    
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
         var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
@@ -45,9 +36,9 @@ public class ExampleSubjectService
 
     public async Task<AddBase64ExampleSubjectResponse> AddBase64ExampleSubjectAsync(AddBase64ExampleSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
-         var response = await requestUrl
+        var response = await requestUrl
             .SetQueryParams(new
             {
                 subject = request.Subject,
@@ -77,7 +68,7 @@ public class ExampleSubjectService
 
     public async Task<DeleteAllExamplesResponse> ClearSubjectAsync(DeleteAllExamplesRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl.
             SetQueryParam("subject", request.Subject)
@@ -88,7 +79,7 @@ public class ExampleSubjectService
 
     public async Task<DeleteImageByIdResponse> DeleteImageByIdAsync(DeleteImageByIdRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment(request.ImageId.ToString())
@@ -98,21 +89,22 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<DeleteMultipleExamplesResponse> DeletMultipleExamplesAsync(DeleteMultipleExampleRequest deleteMultipleExamplesRequest)
+    public async Task<List<DeleteMultipleExamplesResponse>> DeletMultipleExamplesAsync(DeleteMultipleExampleRequest deleteMultipleExamplesRequest)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment("delete")
             .PostJsonAsync(deleteMultipleExamplesRequest.ImageIdList)
-            .ReceiveJson<DeleteMultipleExamplesResponse>();
+            .ReceiveJson<List<DeleteMultipleExamplesResponse>>();
 
         return response;
+
     }
 
     public async Task<byte[]> DownloadImageByIdAsync(DownloadImageByIdRequest downloadImageByIdRequest)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}static";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegments(downloadImageByIdRequest.RecognitionApiKey.ToString(), "/images/", downloadImageByIdRequest.ImageId.ToString())
@@ -123,7 +115,7 @@ public class ExampleSubjectService
 
     public async Task<byte[]> DownloadImageBySubjectIdAsync(DownloadImageBySubjectIdRequest downloadImageBySubjectIdRequest)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegments(downloadImageBySubjectIdRequest.ImageId.ToString(), "/img")

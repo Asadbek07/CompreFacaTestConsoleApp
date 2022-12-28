@@ -2,6 +2,8 @@
 {
     public class DeleteMultipleExamplesResponse
     {
-        public IList<Face> Faces { get; set; }
+        public Guid ImageId { get; set; }
+
+        public string Subject { get; set; }
     }
 }
