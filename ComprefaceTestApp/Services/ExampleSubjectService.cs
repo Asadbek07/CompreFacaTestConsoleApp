@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
-using ComprefaceTestApp.DTOs;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
 using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;

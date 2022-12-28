@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject
 {
     public class AddBase64ExampleSubjectRequest
@@ -8,6 +7,6 @@ namespace ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject
 
         public decimal? DetProbThreShold { get; set; }
 
-        public string File { get; set; }
+        public FileBase File { get; set; }
     }
 }
