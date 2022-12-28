@@ -1,4 +1,12 @@
 ﻿using System.Text.Json;
+using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFacesFromImageWithBase64;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.VerifyFacesFromImage;
+using ComprefaceTestApp.DTOs.RecognitionDTOs.VerifyFacesFromImageWithBase64;
+using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
+using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;
 using Flurl.Http;
 using Microsoft.Extensions.Hosting;
@@ -6,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Shared;
 using Shared.Constants;
 using ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject;
+using Shared.CustomJSONSerializer;
 
 namespace ComprefaceTestApp;
 
@@ -21,30 +30,29 @@ public class Program
                 s.AddHttpClient(Compreface, (serviceProvider, client) =>
                 {
                     client.BaseAddress = new Uri(RequestConstants.BaseUrl);
-                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36");
-                    client.DefaultRequestHeaders.Add("x-api-key", "9cd290ce-62be-4c77-ae68-4a6605453783");
+                    client.DefaultRequestHeaders.Add("User-Agent",
+                        RequestConstants.UserAgent);
                 });
             })
             .Build();
 
         FlurlHttp.GlobalSettings.BeforeCall += call =>
         {
-            call.Request.Headers.Add("x-api-key", "9cd290ce-62be-4c77-ae68-4a6605453783");
+            call.Request.Headers.Add("x-api-key", RequestConstants.API_KEY);
         };
 
         var jsonOptions = new JsonSerializerOptions()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNamingPolicy = SnakeCaseToCamelCaseNamingPolicy.Policy,
+            PropertyNameCaseInsensitive = true,
         };
 
         FlurlHttp.GlobalSettings.JsonSerializer = new SystemJsonSerializer(jsonOptions);
 
         var serviceProvider = host.Services;
 
-        var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-        var httpClient = httpClientFactory.CreateClient(Compreface);
-
-        var subjectService = new SubjectService(httpClient);
-        var exampleSubjectService = new ExampleSubjectService(httpClient, jsonOptions);
+        var subjectService = new SubjectService();
+        var exampleSubjectService = new ExampleSubjectService();
+        var recognitionService = new RecognitionService();
     }
 }
