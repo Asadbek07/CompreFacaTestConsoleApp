@@ -2,7 +2,7 @@
 
 namespace ComprefaceTestApp.Configuration;
 
-public class ComprefaceConfiguration
+public class ComprefaceConfiguration : IComprefaceConfiguration
 {
     public string BaseUrl { get; set; }
     
