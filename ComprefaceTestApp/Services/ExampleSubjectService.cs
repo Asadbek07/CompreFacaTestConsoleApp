@@ -6,23 +6,15 @@ using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
 using Shared;
+using Shared.Constants;
 
 namespace ComprefaceTestApp.Services;
 
 public class ExampleSubjectService
 {
-    private readonly HttpClient _httpClient;
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
-
-    public ExampleSubjectService(HttpClient httpClient, JsonSerializerOptions jsonSerializerOptions)
-    {
-        _httpClient = httpClient;
-        _jsonSerializerOptions = jsonSerializerOptions;
-    }
-    
     public async Task<AddExampleSubjectResponse> AddExampleSubject(AddExampleSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .SetQueryParams(new
@@ -38,7 +30,7 @@ public class ExampleSubjectService
     }
     public async Task<ListAllExampleSubjectResponse> GetAllExampleSubjects(ListAllExampleSubjectRequest request)
     {
-        var requestUrl = $"{_httpClient.BaseAddress}recognition/faces";
+        var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .SetQueryParams(new
