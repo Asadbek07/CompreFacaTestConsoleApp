@@ -1,5 +1,4 @@
-﻿
-namespace ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.AddBase64ExampleSubject
 {
     public class AddBase64ExampleSubjectRequest
     {

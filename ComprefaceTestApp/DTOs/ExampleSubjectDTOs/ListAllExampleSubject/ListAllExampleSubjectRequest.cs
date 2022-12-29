@@ -1,4 +1,4 @@
-﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.ListAllExampleSubject;
 
 public class ListAllExampleSubjectRequest
 {

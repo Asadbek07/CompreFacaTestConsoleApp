@@ -1,4 +1,4 @@
-﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DownloadImageById
 {
     public class DownloadImageByIdRequest
     {

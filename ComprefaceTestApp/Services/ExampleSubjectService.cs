@@ -1,16 +1,14 @@
 ﻿using System.Net.Http.Json;
-using System.Text.Json;
-using ComprefaceTestApp.DTOs.ExampleSubject.AddBase64ExampleSubject;
-using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
-using ComprefaceTestApp.DTOs.ExampleSubject.DeleteAllSubjectExamples;
-using ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById;
-using ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples;
-using ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageById;
-using ComprefaceTestApp.DTOs.ExampleSubject.DownloadImageBySubjectId;
-using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.AddBase64ExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.AddExampleSubject;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DeleteAllSubjectExamples;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DeleteImageById;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DeleteMultipleExamples;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DownloadImageById;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DownloadImageBySubjectId;
+using ComprefaceTestApp.DTOs.ExampleSubjectDTOs.ListAllExampleSubject;
 using Flurl;
 using Flurl.Http;
-using Shared;
 using Shared.Constants;
 
 namespace ComprefaceTestApp.Services;
@@ -89,16 +87,16 @@ public class ExampleSubjectService
         return response;
     }
 
-    public async Task<List<DeleteMultipleExamplesResponse>> DeletMultipleExamplesAsync(DeleteMultipleExampleRequest deleteMultipleExamplesRequest)
+    public async Task<DeleteMultipleExamplesResponse> DeletMultipleExamplesAsync(DeleteMultipleExampleRequest deleteMultipleExamplesRequest)
     {
         var requestUrl = $"{RequestConstants.BaseUrl}recognition/faces";
 
         var response = await requestUrl
             .AppendPathSegment("delete")
             .PostJsonAsync(deleteMultipleExamplesRequest.ImageIdList)
-            .ReceiveJson<List<DeleteMultipleExamplesResponse>>();
+            .ReceiveJson<List<Face>>();
 
-        return response;
+        return new DeleteMultipleExamplesResponse() { Faces = response }; ;
 
     }
 

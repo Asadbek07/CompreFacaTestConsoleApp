@@ -247,13 +247,13 @@ var imageBytes = File.ReadAllBytes("file path here");
 
 *Delete multiple examples*
 ```
-await exampleSubjectService.DeletMultipleExamplesAsync(
-            new DTOs.ExampleSubject.DeleteMultipleExamples.DeleteMultipleExamplesRequest()
+ await exampleSubjectService.DeletMultipleExamplesAsync(
+            new DTOs.ExampleSubjectDTOs.DeleteMultipleExamples.DeleteMultipleExampleRequest()
             {
                 ImageIdList = new List<Guid>
                 {
-                    Guid.Parse("c5bc0e91-c3c1-45a0-87e3-5e3beff17106"),
-                    Guid.Parse("8c8d909d-40a1-471d-ba2a-cd8200d85754")
+                    Guid.Parse("39bbf8c8-e7de-4b0c-9035-bbbe3621ab89"),
+                    Guid.Parse("208a3002-75cd-4b95-93aa-89c727e454da")
                 }
             });
 ```
