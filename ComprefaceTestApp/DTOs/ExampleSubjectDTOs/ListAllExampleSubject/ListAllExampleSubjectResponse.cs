@@ -1,7 +1,6 @@
-﻿using System.Text.Json.Serialization;
-using ComprefaceTestApp.DTOs.HelperDTOs;
+﻿using ComprefaceTestApp.DTOs.HelperDTOs;
 
-namespace ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.ListAllExampleSubject;
 
 public class ListAllExampleSubjectResponse
 {

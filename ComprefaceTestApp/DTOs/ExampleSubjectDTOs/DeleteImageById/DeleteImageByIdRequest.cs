@@ -1,4 +1,4 @@
-﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteImageById
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DeleteImageById
 {
     public class DeleteImageByIdRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.DeleteMultipleExamples
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.DeleteMultipleExamples
 {
     public class DeleteMultipleExampleRequest
     {
