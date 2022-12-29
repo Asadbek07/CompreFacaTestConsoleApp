@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.AddExampleSubject;
 
 public class AddExampleSubjectResponse
 {

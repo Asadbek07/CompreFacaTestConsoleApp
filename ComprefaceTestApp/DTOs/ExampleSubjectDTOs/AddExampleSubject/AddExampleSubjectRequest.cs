@@ -1,11 +1,9 @@
-﻿using System.Text.Json.Serialization;
-
-namespace ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.AddExampleSubject;
 
 public class AddExampleSubjectRequest
 {
     public string Subject { get; set; }
-    
+
     public decimal? DetProbThreShold { get; set; }
 
     public string FilePath { get; set; }

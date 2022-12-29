@@ -1,17 +1,8 @@
 ﻿using System.Text.Json;
-using ComprefaceTestApp.DTOs.ExampleSubject.AddExampleSubject;
-using ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
-using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFaceFromImage;
-using ComprefaceTestApp.DTOs.RecognitionDTOs.RecognizeFacesFromImageWithBase64;
-using ComprefaceTestApp.DTOs.RecognitionDTOs.VerifyFacesFromImage;
-using ComprefaceTestApp.DTOs.RecognitionDTOs.VerifyFacesFromImageWithBase64;
-using ComprefaceTestApp.DTOs.SubjectDTOs.AddSubject;
-using ComprefaceTestApp.DTOs.SubjectDTOs.RenameSubject;
 using ComprefaceTestApp.Services;
 using Flurl.Http;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Shared;
 using Shared.Constants;
 using Shared.CustomJSONSerializer;
 
@@ -53,5 +44,15 @@ public class Program
         var subjectService = new SubjectService();
         var exampleSubjectService = new ExampleSubjectService();
         var recognitionService = new RecognitionService();
+
+        await exampleSubjectService.DeletMultipleExamplesAsync(
+            new DTOs.ExampleSubjectDTOs.DeleteMultipleExamples.DeleteMultipleExampleRequest()
+            {
+                ImageIdList = new List<Guid>
+                {
+                    Guid.Parse("39bbf8c8-e7de-4b0c-9035-bbbe3621ab89"),
+                    Guid.Parse("208a3002-75cd-4b95-93aa-89c727e454da")
+                }
+            });
     }
 }

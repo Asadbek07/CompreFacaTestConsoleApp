@@ -26,7 +26,7 @@ public class SubjectService
         var response = await requestUrl.PostJsonAsync(request);
         var subjectDto = await response.ResponseMessage.Content.ReadFromJsonAsync<AddSubjectResponse>();
 
-        return subjectDto;
+        return subjectDto!;
     }
 
     public async Task<RenameSubjectResponse> RenameSubject(RenameSubjectRequest request)
@@ -37,7 +37,7 @@ public class SubjectService
         
         var subjectDto = await response.ResponseMessage.Content.ReadFromJsonAsync<RenameSubjectResponse>();
 
-        return subjectDto;
+        return subjectDto!;
     }
 
     public async Task<DeleteSubjectResponse> DeleteSubject(DeleteSubjectRequest request)
@@ -48,7 +48,7 @@ public class SubjectService
         
         var deleteSubjectResponse = await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteSubjectResponse>();
         
-        return deleteSubjectResponse;
+        return deleteSubjectResponse!;
     }
 
     public async Task<DeleteAllSubjectsResponse> DeleteAllSubjects()
@@ -59,6 +59,6 @@ public class SubjectService
 
         var deleteAllSubjectsResponse = await response.ResponseMessage.Content.ReadFromJsonAsync<DeleteAllSubjectsResponse>();
         
-        return deleteAllSubjectsResponse;
+        return deleteAllSubjectsResponse!;
     }
 }

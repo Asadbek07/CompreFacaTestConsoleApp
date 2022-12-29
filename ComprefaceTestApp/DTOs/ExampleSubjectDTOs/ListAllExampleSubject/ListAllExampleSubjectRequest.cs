@@ -1,4 +1,4 @@
-﻿namespace ComprefaceTestApp.DTOs.ExampleSubject.ListAllExampleSubject;
+﻿namespace ComprefaceTestApp.DTOs.ExampleSubjectDTOs.ListAllExampleSubject;
 
 public class ListAllExampleSubjectRequest
 {
@@ -6,5 +6,5 @@ public class ListAllExampleSubjectRequest
     
     public int? Size { get; set; }
     
-    public string? Subject { get; set; }
+    public string Subject { get; set; }
 }
