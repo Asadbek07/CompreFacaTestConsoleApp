@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComprefaceTestApp", "ComprefaceTestApp\ComprefaceTestApp.csproj", "{F056624D-D598-4D8A-82C3-D64A7E395B3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exadel.Compreface", "Exadel.Compreface\Exadel.Compreface.csproj", "{F056624D-D598-4D8A-82C3-D64A7E395B3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1A4BF50F-519E-4FBD-A2DE-4756BA92007F}"
 EndProject
